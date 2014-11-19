@@ -37,7 +37,7 @@ module Jwthumbs
 
 		def create_sprite(outdir, spritefile, coords, gridsize)
 			grid = "#{gridsize}x#{gridsize}"
-    		cmd = "montage #{outdir}/thumbnail*.jpg -tile #{grid} -geometry #{coords} #{outdir}/#{spritefile}"
+    		cmd = "montage #{outdir}/thumbnail*.jpg -tile #{grid} -geometry #{coords} #{Shellwords.escape([outdir, spritefile].join('/'))}"
 			Jwthumbs.logger.info(system(cmd))
 		 
 		end
@@ -46,7 +46,7 @@ module Jwthumbs
 		def take_snaps
 			rate = "1/#{@movie.seconds_between}"
 			`mkdir -p #{@movie.outdir}`
-			cmd = "ffmpeg -i #{@movie.file_path} -f image2 -bt 20M -vf fps=#{rate} -aspect 16:9 #{@movie.outdir+"/thumbnail%03d.jpg"}"
+			cmd = "ffmpeg -i #{Shellwords.escape(@movie.file_path)} -f image2 -bt 20M -vf fps=#{rate} -aspect 16:9 #{Shellwords.escape(@movie.outdir+"/thumbnail%03d.jpg")}"
 			Jwthumbs.logger.info(cmd)
 			system(cmd)
 		end
