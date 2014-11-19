@@ -4,8 +4,8 @@ require 'spec_helper.rb'
 describe "Initialization" do
 	
 	describe "Check for file_path arguement" do
-		subject(:movie) { Jwthumbs::Movie.new("fixtures/iki_dakka.mp4") }
-		its(:file_path) { should == "fixtures/iki_dakka.mp4"}
+		subject(:movie) { Jwthumbs::Movie.new("fixtures/iki dakka.mp4") }
+		its(:file_path) { should == "fixtures/iki dakka.mp4"}
 	end
 
 	describe "Checks for file existance" do
@@ -13,17 +13,17 @@ describe "Initialization" do
 	end
 
 	describe "spritefile name" do
-		subject(:movie) { Jwthumbs::Movie.new("fixtures/iki_dakka.mp4") }
+		subject(:movie) { Jwthumbs::Movie.new("fixtures/iki dakka.mp4") }
 		its(:spritefile) { should == movie.spritefile}
 	end 
 
 	describe "vttfile name" do
-		subject(:movie) { Jwthumbs::Movie.new("fixtures/iki_dakka.mp4") }
+		subject(:movie) { Jwthumbs::Movie.new("fixtures/iki dakka.mp4") }
 		its(:vttfile) { should == movie.vttfile}
 	end 
 
 	describe "check for outdir " do
-			subject(:movie) { Jwthumbs::Movie.new("fixtures/iki_dakka.mp4") }
+			subject(:movie) { Jwthumbs::Movie.new("fixtures/iki dakka.mp4") }
 			its(:outdir) { should == "output/thumbs_#{Time.now.to_i.to_s}"}
 	end
 
@@ -32,7 +32,7 @@ end
 describe "File progresses" do
 
 		before(:all) do
-			@movie = Jwthumbs::Movie.new("fixtures/iki_dakka.mp4")	
+			@movie = Jwthumbs::Movie.new("fixtures/iki dakka.mp4")	
 		end
 
 			let!(:outdir) { @movie.outdir}
