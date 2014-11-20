@@ -22,7 +22,7 @@ module Jwthumbs
 			@spritefile = options[:spritefile] ||= "#{File.basename(@file_path, File.extname(@file_path))}_sprite.jpg"
 			@vttfile_name = options[:vttfile_name] ||= "thumbs.vtt"
 			@outdir = options[:thumb_outdir] ||= "output/thumbs_#{Time.now.to_i.to_s}"
-			@vttfile = File.basename(@file_path, File.extname(@file_path))+"_"+@vttfile_name	
+			@vttfile = options[:vttfile] ||= File.basename(@file_path, File.extname(@file_path))+"_"+@vttfile_name	
 			@gallery_mode_on = options[:gallery_mode_on] ||= false
 		end
 
