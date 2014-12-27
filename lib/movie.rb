@@ -12,6 +12,11 @@ module Jwthumbs
 
 			command = "ffprobe -i #{Shellwords.escape(file_path)} -show_format | grep duration"
 			output = Open3.popen3(command) { |stdin, stdout, stderr| stderr.read }
+			# Fix our issue with invalid UTF-8 bytes.
+			# Found a solution on http://stackoverflow.com/questions/24036821/ruby-2-0-0-stringmatch-argumenterror-invalid-byte-sequence-in-utf-8
+			unless output.valid_encoding?
+				output = output.encode("UTF-16be", :invalid=>:replace, :replace=>"?").encode('UTF-8')
+			end
 			output[/Duration: (\d{2}):(\d{2}):(\d{2}\.\d{2})/]
 			@duration = ($1.to_i*60*60) + ($2.to_i*60) + $3.to_f
 
